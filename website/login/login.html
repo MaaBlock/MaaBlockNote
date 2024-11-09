@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+    <title>MaBlock笔记登录页面</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="login.js"></script>
+</head>
+<body>
+    <div class="login-box">
+        <h2 style="text-align: center;">MaBlock笔记</h2>
+        <div id="error-message" class="error-message">
+            <p id="error-text"></p>
+        </div>
+        <form id="login-form">
+            <label for="username">用户名:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">密码:</label>
+            <input type="password" id="password" name="password" required>
+            <div id = "register-box">
+                <a class="register-link" href="../register/register.html">注册</a>
+                <div style="text-align: right;">
+                    <button type="submit">登录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

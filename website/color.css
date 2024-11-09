@@ -1,0 +1,12 @@
+:root {
+    --TransprantBackGround: rgba(13, 31, 45, 0.7); 
+    --TitleColor: #f1c40f;
+    --TextColor: #ecf0f1;
+    --InputBackground: rgba(52, 152, 219, 0.2);  
+    --InputFocus: rgba(241, 196, 15, 0.4);  /* 使用 TitleColor 的颜色，但增加透明度 */
+    --ButtonBackground: #2980b9;  /* 深蓝色 */
+    --ErrorText: #e74c3c;
+    --BackgroundColor: #34495e;  
+    --DeeperBackgroundColor: #2c3e50;
+    --ActiveColor: #3498db;
+}
