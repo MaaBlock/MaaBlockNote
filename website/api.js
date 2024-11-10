@@ -1,5 +1,3 @@
-import { login } from "../server/userManager";
-
 async function request(url, method, data = null, headers = {}) {
     try {
         console.log(data);

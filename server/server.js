@@ -32,7 +32,6 @@ app.post('/login', (req, res) => {
     const password = req.body.password;
     try {
         userManager.login(username, password);    
-        generateToken(username,'1h');
         res.cookie('token', generateToken(username,'1h'), 
         { 
             expires: new Date(Date.now() + 60 * 60 * 1000) ,

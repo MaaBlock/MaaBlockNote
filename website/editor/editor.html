@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <head>
     <title>MaBlock笔记</title>
+    <link rel="stylesheet" href="editor.css">
+    <script src="editor.js"></script>
 </head>
 <body>
-    
+    <div class="tool-bar">
+        <div class="bar-buttons">
+            <div class="bar-button-box"> 
+                <div class="bar-button" id="ResourceManagerTabBtn" onclick="onTabBtnClick(event)">
+                    <img class="bar-button-icon" src="ResourceManager.png"></img>
+                </div>
+            </div>
+            <div class="bar-button-box"> 
+                <div class="bar-button" id="UserTabBtn" onclick="onTabBtnClick(event)" >
+                    <img class="bar-button-icon" src="UserBarBtn.png"></img>
+                </div>
+            </div>
+        </div>
+        <div class="bar-content" id="bar-content">
+
+        </div>
+    </div>
 </body>

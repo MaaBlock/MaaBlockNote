@@ -69,7 +69,7 @@ class UserManager{
         if (!bcrypt.compareSync(password, user.password)) {
             throw new Error('用户名或密码错误');
         }
-        return generateToken(user);
+        return;
     }
 }
 

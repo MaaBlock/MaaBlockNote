@@ -1,0 +1,50 @@
+@import url(../color.css);
+body {
+    background-image: url('editor_background.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bar-buttons{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    box-shadow: 2px 0px 0px var(--SeparatorColor);
+    background-color: var(--DeeperBackgroundColor);
+    z-index: 30;
+}
+.bar-button-box{
+    width: 100px;
+    height: 100px;
+}
+.bar-button {
+    width: 100px;
+    height: 100px;
+    border: 0;
+    filter: brightness(0.8);
+}
+.bar-button.active {
+    filter: brightness(1.0);
+}
+.bar-button:hover {
+    filter: brightness(1.0);
+}
+.bar-button.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--ActiveColor); 
+}
+.tab-context-box{
+    position: absolute;
+    background-color: var(--DeeperBackgroundColor);
+    top: 0px;
+    left: 100px;
+    width: 400px;
+    height: 100%;
+    z-index: 20;
+}
