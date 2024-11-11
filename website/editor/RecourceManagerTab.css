@@ -17,6 +17,11 @@
 .file-system-node-box:hover[data-level="0"] {
     background-color: rgba(255,255,255,0.0);
 }
+.file-system-node-box.active{
+    border: 1px;
+    border-style: solid;
+    border-color: var(--ActiveColor);
+}
 .operate-area{
     display: flex;
     margin-left: auto;

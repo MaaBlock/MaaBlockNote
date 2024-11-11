@@ -16,7 +16,9 @@ function createFileNode(fileInfo, level) {
     node.appendChild(p);
 
     if (fileInfo.type === 'directory') {
-        node.onclick = onNodeClick;
+        node.onclick = window.onNodeClick;
+    } else {
+        node.onclick = window.onFileClick;
     }
 
     return node;
@@ -49,6 +51,10 @@ async function updateFileSystem(node) {
 
 async function onNodeClick(event) {
     const node = event.currentTarget;
+    document.querySelectorAll('.file-system-node-box.active').forEach(activeNode => {
+        activeNode.classList.remove('active');
+    })
+    node.classList.add('active');
     if (node.classList.contains('expanded')) {
         node.classList.remove('expanded');
         removeChildren(node);
@@ -56,6 +62,13 @@ async function onNodeClick(event) {
         node.classList.add('expanded');
         await updateFileSystem(node);
     }
+}
+async function onFileClick(event) {
+    const node = event.currentTarget;
+    document.querySelectorAll('.file-system-node-box.active').forEach(activeNode => {
+        activeNode.classList.remove('active');
+    })
+    node.classList.add('active');
 }
 function onAddFileBtnClick(event) {
     event.preventDefault();
@@ -65,6 +78,56 @@ function onAddDirectoryBtnClick(event) {
     event.preventDefault()
     event.stopPropagation();
 }
+
+function onRenameBtnClick(event) {
+    event.preventDefault()
+    event.stopPropagation();
+    const activeNode = document.querySelector('.file-system-node-box.active');
+    if (!activeNode) {
+        alert('请先选择要重命名的文件或文件夹');
+    }
+    if (activeNode.style.getPropertyValue('--level') === '0') {
+        alert('根目录不可以重命名');
+        return;
+    }
+    const text = activeNode.querySelector('p');
+    const oldPath = activeNode.dataset.path;
+     
+    
+    const input = document.createElement('input');
+    input.value = text.textContent;
+    input.type = 'text';
+    input.style.width = '100%';
+    input.style.boxSizing = 'border-box';
+    text.replaceWith(input);
+    input.focus();
+    input.select();
+    const saveRename = async () => {
+        if (input.value) {
+            const newName = input.value;
+            try {
+                await api.rename(oldPath, newName);
+                text.textContent = input.value;
+                input.replaceWith(text);
+                updateFileSystem(activeNode.parentNode);
+            } catch (error) {
+                console.error(error.message);
+            }
+        } else {
+            input.replaceWith(text);
+        }
+    }
+    input.addEventListener('blur', saveRename);
+    input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            saveRename();
+        } else if (event.key === 'Escape') {
+            input.replaceWith(text);
+        }
+    });
+}
 window.onNodeClick = onNodeClick;
+window.onFileClick = onFileClick;
 window.onAddFileBtnClick = onAddFileBtnClick;
 window.onAddDirectoryBtnClick = onAddDirectoryBtnClick;
+window.onRenameBtnClick = onRenameBtnClick;

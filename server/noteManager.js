@@ -25,5 +25,14 @@ class NoteManager {
             };
         });
     }
+    rename(username, oldPath, newName) {
+        try {
+            const oldFullPath = path.join(config.userdataPath, username, 'private', oldPath);
+            const newPath = path.join(path.dirname(oldFullPath), newName);
+            fs.renameSync(oldFullPath, newPath);
+        } catch (error) {
+            throw new Error(`重命名失败: ${error.message}`);
+        }
+    }
 }
 module.exports = new NoteManager;

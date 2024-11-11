@@ -10,7 +10,7 @@ const noteManager = require('./noteManager');
 app.use(cors({
     origin: ['http://127.0.0.1:3000', 'http://localhost:3000'],
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     exposedHeaders: ['Set-Cookie']  
 }));
@@ -96,6 +96,18 @@ app.get('/getUserFileSystem', (req, res) => {
         res.status(200).json(files);
     } catch (error) {
         res.status(500).json({ error: error.message });
+    }
+})
+app.patch('/rename', (req, res) => {
+    const user = req.user;
+    const oldPath = req.body.oldPath;
+    const newName = req.body.newName;
+
+    try {
+        noteManager.rename(user.username, oldPath, newName);
+        res.status(200).json({ message: '重命名成功'});
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 })
 
