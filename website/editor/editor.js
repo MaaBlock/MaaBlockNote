@@ -25,5 +25,14 @@ function onTabBtnClick(event) {
                 return;
             }
             tabContent.innerHTML = html;
-        });
+            const ResourceManagerScript = document.createElement('script');
+            ResourceManagerScript.src = 'ResourceManagerTab.js';
+            ResourceManagerScript.type = 'module';
+            document.body.appendChild(ResourceManagerScript); 
+            const UserScript = document.createElement('script');
+            UserScript.src = 'UserTab.js';
+            UserScript.type = 'module';
+            document.body.appendChild(UserScript);
+        }) 
 }
+window.onTabBtnClick = onTabBtnClick;

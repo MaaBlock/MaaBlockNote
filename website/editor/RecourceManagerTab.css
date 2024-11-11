@@ -1,0 +1,57 @@
+@import url(../color.css);
+.file-system-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; 
+}
+
+.file-system-node-box {
+    font-size: 30px;
+    display: flex;
+    align-items: center; 
+    padding-left: calc(10px * var(--level));
+}
+.file-system-node-box:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+.file-system-node-box:hover[data-level="0"] {
+    background-color: rgba(255,255,255,0.0);
+}
+.operate-area{
+    display: flex;
+    margin-left: auto;
+}
+.opretate-btn{
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+.opretate-btn:hover{
+    background-color: rgba(255,255,255,0.2);
+}
+
+.file-system-node-box img {
+    width: 40px; 
+    height: 40px;
+}
+.file-system-node-box[data-level="0"] {
+    font-size: 50px;
+}
+.file-system-node-box.expanded img {
+    transform: rotate(90deg);
+}
+.file-system-node-box p {
+    font-size: 14px;
+    word-wrap: break-word;
+    color: var(--TextColor);
+}
+
+.file-system-node-box.expanded img.opretate-img {
+    transform: none;
+}
+.opretate-img {
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+}

@@ -1,3 +1,15 @@
 <div class="tab-context-box">
-    fileSystemTab
+    <link rel="stylesheet" href="RecourceManagerTab.css">
+    <div class="file-system-node-box" onclick="onNodeClick(event)" data-path="/" data-level="0" style="--level: 0">
+        <img src="folder.png">
+        <p>root</p>
+        <div class="operate-area">
+            <div class="opretate-btn" onclick="onAddFileBtnClick(event)">
+                <img class="opretate-img" src="addFile.png">
+            </div>
+            <div class="opretate-btn" onclick="onAddDirectoryBtnClick(event)">
+                <img class="opretate-img" src="addDirectory.png">
+            </div>
+        </div>
+    </div>
 </div>
