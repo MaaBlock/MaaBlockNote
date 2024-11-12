@@ -115,7 +115,12 @@ app.post('/addFile', (req, res) => {
     const name = req.body.name;
     const path = req.body.path;
     const type = req.body.type; 
-    noteManager.addFile(user.username, type, path, name);
+    try {
+        noteManager.addFile(user.username, type, path, name);
+        res.status(200);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 })
 app.listen(config.port, () => {
     console.log(`Server is running on port ${config.port}`);

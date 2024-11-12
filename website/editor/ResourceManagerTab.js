@@ -4,6 +4,7 @@ function createFileNode(fileInfo, level) {
     node.className = 'file-system-node-box';
     node.dataset.path = fileInfo.path;
     node.dataset.level = level;
+    node.dataset.type = fileInfo.type;
     node.style.setProperty('--level', level); 
     //ode.style.paddingLeft = `${level * 20}px`; // 缩进
 
@@ -27,8 +28,9 @@ function createUnnamedNode(node, type) {
     const newNode = document.createElement('div');
     newNode.className = 'file-system-node-box';
     newNode.dataset.path = node.dataset.path;
+    newNode.dataset.type = type;
     const level = node.style.getPropertyValue('--level');
-    const newLevel = node.type === 'File' ? level : level + 1;
+    const newLevel = node.dataset.type === 'file' ? level : parseInt(level,10) + 1;
     newNode.style.setProperty('--level', newLevel);
 
     const img = document.createElement('img');
@@ -49,6 +51,7 @@ function createUnnamedNode(node, type) {
                 await api.addFile(type,newNode.dataset.path, text);
             } catch (error) {
                 console.error(error.message);
+                //alert(error.message);
             }
         } else {
             newNode.remove();

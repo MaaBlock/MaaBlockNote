@@ -35,18 +35,22 @@ class NoteManager {
         }
     }
     addFile(username,type,srcPath, name) {
+        try {
         var newPath;
         const newnewPath = path.join(config.userdataPath, username, 'private', srcPath);
         const srcFile = fs.statSync(newnewPath);    
         if (srcFile.isDirectory()) {
             newPath = path.join(config.userdataPath,username,'private',srcPath, name);
         } else {
-            newPath = path.join(config.userdataPath,username,'private',srcPath.dirname(srcPath), name);
+            newPath = path.join(config.userdataPath,username,'private',path.dirname(srcPath), name);
         }
         if (type === 'directory') {
             fs.mkdirSync(newPath, { recursive: true });
         } else {
             fs.writeFileSync(newPath, '');
+        }
+        } catch (error) {
+            throw new Error(`添加失败: ${error.message}`);
         }
     }
 }
