@@ -23,6 +23,46 @@ function createFileNode(fileInfo, level) {
 
     return node;
 }
+function createUnnamedNode(node, type) {
+    const newNode = document.createElement('div');
+    newNode.className = 'file-system-node-box';
+    newNode.dataset.path = node.dataset.path;
+    const level = node.style.getPropertyValue('--level');
+    const newLevel = node.type === 'File' ? level : level + 1;
+    newNode.style.setProperty('--level', newLevel);
+
+    const img = document.createElement('img');
+    img.src = type === 'directory' ? 'folder.png' : 'file.png';
+    newNode.appendChild(img);
+
+    const input = document.createElement('input');
+    input.value = '';
+    input.type = 'text';
+    input.style.width = '100%';
+    input.style.boxSizing = 'border-box';
+    newNode.appendChild(input);
+    node.parentNode.insertBefore(newNode, node.nextSibling);
+    const saveName = async () => {
+        const text = input.value.trim();
+        if (text) {
+            try {
+                await api.addFile(type,newNode.dataset.path, text);
+            } catch (error) {
+                console.error(error.message);
+            }
+        } else {
+            newNode.remove();
+        }
+    }
+    input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            saveName();
+        }
+    });
+    input.addEventListener('blur', (event) => {
+        saveName();
+    });
+}
 
 function removeChildren(parentNode) {
     const level = parseInt(parentNode.style.getPropertyValue('--level'),10);
@@ -73,10 +113,20 @@ async function onFileClick(event) {
 function onAddFileBtnClick(event) {
     event.preventDefault();
     event.stopPropagation();
+    const activeNode = document.querySelector('.file-system-node-box.active');
+    if (!activeNode) {
+        alert('请先选择要添加的文件');
+    }
+    createUnnamedNode(activeNode, 'file');
 }
 function onAddDirectoryBtnClick(event) {
     event.preventDefault()
     event.stopPropagation();
+    const activeNode = document.querySelector('.file-system-node-box.active');
+    if (!activeNode) {
+        alert('请先选择要添加的文件夹');
+    }
+    createUnnamedNode(activeNode, 'directory');
 }
 
 function onRenameBtnClick(event) {

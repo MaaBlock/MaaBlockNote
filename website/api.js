@@ -31,7 +31,8 @@ const api = {
     register: (data) => request('/register', 'POST', data),
     login: (data) => request('/login', 'POST', data),
     getUserFileSystem: (dir = '') => request(`/getUserFileSystem`, 'GET',{dir:dir}),
-    rename: (oldPath, newName) => request('/rename', 'PATCH', {oldPath: oldPath, newName: newName})
+    rename: (oldPath, newName) => request('/rename', 'PATCH', {oldPath: oldPath, newName: newName}),
+    addFile: (type,path, name) => request('/addFile', 'POST', {type: type,name: name, path: path}),
 };
 
 export default api;

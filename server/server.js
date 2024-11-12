@@ -110,7 +110,13 @@ app.patch('/rename', (req, res) => {
         res.status(400).json({ error: error.message });
     }
 })
-
+app.post('/addFile', (req, res) => {
+    const user = req.user;
+    const name = req.body.name;
+    const path = req.body.path;
+    const type = req.body.type; 
+    noteManager.addFile(user.username, type, path, name);
+})
 app.listen(config.port, () => {
     console.log(`Server is running on port ${config.port}`);
 });

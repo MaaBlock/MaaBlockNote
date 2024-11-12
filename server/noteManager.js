@@ -34,5 +34,20 @@ class NoteManager {
             throw new Error(`重命名失败: ${error.message}`);
         }
     }
+    addFile(username,type,srcPath, name) {
+        var newPath;
+        const newnewPath = path.join(config.userdataPath, username, 'private', srcPath);
+        const srcFile = fs.statSync(newnewPath);    
+        if (srcFile.isDirectory()) {
+            newPath = path.join(config.userdataPath,username,'private',srcPath, name);
+        } else {
+            newPath = path.join(config.userdataPath,username,'private',srcPath.dirname(srcPath), name);
+        }
+        if (type === 'directory') {
+            fs.mkdirSync(newPath, { recursive: true });
+        } else {
+            fs.writeFileSync(newPath, '');
+        }
+    }
 }
 module.exports = new NoteManager;
