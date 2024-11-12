@@ -44,6 +44,8 @@ function createUnnamedNode(node, type) {
     input.style.boxSizing = 'border-box';
     newNode.appendChild(input);
     node.parentNode.insertBefore(newNode, node.nextSibling);
+    input.focus();
+    input.select();
     const saveName = async () => {
         const text = input.value.trim();
         if (text) {
@@ -112,6 +114,11 @@ async function onFileClick(event) {
         activeNode.classList.remove('active');
     })
     node.classList.add('active');
+    if (isOnWorkspace(node.dataset.path)) {
+        
+    } else {
+        addWorkFile(node.dataset.path);
+    }
 }
 function onAddFileBtnClick(event) {
     event.preventDefault();

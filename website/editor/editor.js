@@ -35,4 +35,18 @@ function onTabBtnClick(event) {
             document.body.appendChild(UserScript);
         }) 
 }
+function initWorkSpace() {
+    const workSpaceArea = document.querySelector(".workspace-area");
+    fetch('./workspace.html')
+    .then(res => res.text())
+    .then(html => {
+        workSpaceArea.innerHTML = html;
+        const workSpaceScript = document.createElement('script');
+        workSpaceScript.src = 'workspace.js';
+        workSpaceScript.type = 'module';
+        document.body.appendChild(workSpaceScript);
+        window.freshWorkSpace();
+    }) 
+}
 window.onTabBtnClick = onTabBtnClick;
+initWorkSpace();
